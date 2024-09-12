@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 root = Tk()
 root.title('Codemy.com - Tic-Tac-Toe')
-root.iconbitmap('c:/gui/codemy.ico')
+
 #root.geometry("1200x710")
 
 # X starts so true

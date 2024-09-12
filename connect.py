@@ -3,7 +3,7 @@ from tkinter import messagebox
 
 root = Tk()
 root.title('Connect 4')
-root.iconbitmap('c:/gui/codemy.ico')
+
 #root.geometry("1200x710")
 
 
@@ -29,6 +29,7 @@ def b_click(b):
 def reset():
 	global b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42
 	global b43, b44, b45, b46, b47, b48, b49
+	global list1, list2, list3, list4, list5, list6, list7
 	global clicked, count
 	clicked = True
 	count = 0
@@ -46,7 +47,7 @@ def reset():
 
 
 
-	b1 = Button(root, text="CLICK", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b1), fg = "red")
+	b1 = Button(root, text="CLICK", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b1))
 	b2 = Button(root, text="CLICK", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b2))
 	b3 = Button(root, text="CLICK", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b3))
 
@@ -145,6 +146,32 @@ def reset():
 	b48.grid(row=6, column=5)
 	b49.grid(row=6, column=6)
 
+	list1 = [b1, b8, b15, b22, b29, b36, b43]
+	list2 = [b2, b9, b16, b23, b30, b37, b44]
+	list3 = [b3, b10, b17, b24, b31, b38, b45]
+	list4 = [b4, b11, b18, b25, b32, b39, b46]
+	list5 = [b5, b12, b19, b26, b33, b40, b47]
+	list6 = [b6, b13, b20, b27, b34, b41, b48]
+	list7 = [b7, b14, b21, b28, b35, b42, b49]
+
+
+
+def getLowest(column):
+
+	for a in range(1, len(column)):
+		if column[a]["bg"] == "SystemButtonFace":
+			lowest = column[a]
+	return lowest
+
+
+def isColumnFilled(col):
+	bool = True
+	for x in range(len(col)):
+		if col[x]["bg"] == "SystemButtonFace":
+			bool = False
+	return bool
+
+
 
 def checkifwon():
 	pass
@@ -153,18 +180,137 @@ def checkifwon():
 def b_click(b):
 	global clicked, count
 
-	if b["bg"] == "SystemButtonFace" and clicked == True:
-		b["bg"] = "red"
-		clicked = False
-		count += 1
-		checkifwon()
-	elif b["bg"] == "SystemButtonFace" and clicked == False:
-		b["bg"] = "blue"
-		clicked = True
-		count += 1
-		checkifwon()
+
+
+
+	if b["text"] == "CLICK" and clicked == True:
+		if b in list1:
+			if not (isColumnFilled(list1)):
+				temp = getLowest(list1)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list2:
+			if not (isColumnFilled(list2)):
+				temp = getLowest(list2)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list3:
+			if not (isColumnFilled(list3)):
+				temp = getLowest(list3)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list4:
+			if not (isColumnFilled(list4)):
+				temp = getLowest(list4)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list5:
+			if not (isColumnFilled(list5)):
+				temp = getLowest(list5)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list6:
+			if not (isColumnFilled(list6)):
+				temp = getLowest(list6)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+		elif b in list7:
+			if not (isColumnFilled(list7)):
+				temp = getLowest(list7)
+				temp["bg"] = "red"
+				clicked = False
+				count += 1
+				checkifwon()
+
+
+	elif b["text"] == "CLICK" and clicked == False:
+		if b in list1:
+			if not (isColumnFilled(list1)):
+				temp = getLowest(list1)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list2:
+			if not (isColumnFilled(list2)):
+				temp = getLowest(list2)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list3:
+			if not (isColumnFilled(list3)):
+				temp = getLowest(list3)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list4:
+			if not (isColumnFilled(list4)):
+				temp = getLowest(list4)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list5:
+			if not (isColumnFilled(list5)):
+				temp = getLowest(list5)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list6:
+			if not (isColumnFilled(list6)):
+				temp = getLowest(list6)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
+
+
+		elif b in list7:
+			if not (isColumnFilled(list7)):
+				temp = getLowest(list7)
+				temp["bg"] = "blue"
+				clicked = True
+				count += 1
+				checkifwon()
 	else:
-		messagebox.showerror("Tic Tac Toe", "Hey! That box has already been selected\nPick Another Box..." )
+		messagebox.showerror("Not a valid Box" )
 
 my_menu = Menu(root)
 root.config(menu=my_menu)
