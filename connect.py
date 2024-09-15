@@ -29,7 +29,7 @@ def b_click(b):
 def reset():
 	global b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42
 	global b43, b44, b45, b46, b47, b48, b49
-	global list1, list2, list3, list4, list5, list6, list7
+	global list1, list2, list3, list4, list5, list6, list7, gameBoard
 	global clicked, count
 	clicked = True
 	count = 0
@@ -154,6 +154,7 @@ def reset():
 	list6 = [b6, b13, b20, b27, b34, b41, b48]
 	list7 = [b7, b14, b21, b28, b35, b42, b49]
 
+	gameBoard = [     [b8, b9, b10, b11, b12, b13, b14], [b15, b16, b17, b18, b19, b20, b21], [b22, b23, b24, b25, b26, b27, b28], [b29, b30, b31, b32, b33, b34, b35], [b36, b37, b38, b39, b40, b41, b42], [b43, b44, b45, b46, b47, b48, b49]]
 
 
 def getLowest(column):
@@ -166,7 +167,7 @@ def getLowest(column):
 
 def isColumnFilled(col):
 	bool = True
-	for x in range(len(col)):
+	for x in range(1, len(col)):
 		if col[x]["bg"] == "SystemButtonFace":
 			bool = False
 	return bool
@@ -174,7 +175,65 @@ def isColumnFilled(col):
 
 
 def checkifwon():
-	pass
+	global winner
+	winner = True
+
+
+
+	for row in range(6):
+		for col in range(4):
+			if all(gameBoard[row][col+i]["bg"] == "red" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Red Wins!!")
+				disable_all_buttons()
+			elif all(gameBoard[row][col+i]["bg"] == "blue" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Blue Wins!!")
+				disable_all_buttons()
+				
+
+    # Check vertical
+	for col in range(7):
+		for row in range(3):
+			if all(gameBoard[row+i][col]["bg"] == "red" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Red Wins!!")
+				disable_all_buttons()
+			elif all(gameBoard[row+i][col]["bg"] == "blue" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Blue Wins!!")
+				disable_all_buttons()
+
+    # Check diagonals (top-left to bottom-right)
+	for col in range(4):	
+		for row in range(3):
+			if all(gameBoard[row+i][col+i]["bg"] == "red" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Red Wins!!")
+				disable_all_buttons()
+			elif all(gameBoard[row+i][col+i]["bg"] == "blue" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Blue Wins!!")
+				disable_all_buttons()
+				
+
+    # Check diagonals (bottom-left to top-right)
+	for col in range(4):	
+		for row in range(3, 6):
+			if all(gameBoard[row-i][col+i]["bg"] == "red" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Red Wins!!")
+				disable_all_buttons()
+			elif all(gameBoard[row-i][col+i]["bg"] == "blue" for i in range(4)):
+				winner = True
+				messagebox.showinfo("Connect 4", "CONGRATULATIONS!  Blue Wins!!")
+				disable_all_buttons()
+
+
+	if count == 42 and winner == False:
+		messagebox.showinfo("Connect 4", "It's A Tie!\n No One Wins!")
+		disable_all_buttons()
+	
 
 # Button clicked function
 def b_click(b):
@@ -188,6 +247,7 @@ def b_click(b):
 			if not (isColumnFilled(list1)):
 				temp = getLowest(list1)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -197,6 +257,7 @@ def b_click(b):
 			if not (isColumnFilled(list2)):
 				temp = getLowest(list2)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -206,6 +267,7 @@ def b_click(b):
 			if not (isColumnFilled(list3)):
 				temp = getLowest(list3)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -215,6 +277,7 @@ def b_click(b):
 			if not (isColumnFilled(list4)):
 				temp = getLowest(list4)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -224,6 +287,7 @@ def b_click(b):
 			if not (isColumnFilled(list5)):
 				temp = getLowest(list5)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -233,6 +297,7 @@ def b_click(b):
 			if not (isColumnFilled(list6)):
 				temp = getLowest(list6)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -242,6 +307,7 @@ def b_click(b):
 			if not (isColumnFilled(list7)):
 				temp = getLowest(list7)
 				temp["bg"] = "red"
+				temp["text"] = "X"
 				clicked = False
 				count += 1
 				checkifwon()
@@ -252,6 +318,7 @@ def b_click(b):
 			if not (isColumnFilled(list1)):
 				temp = getLowest(list1)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -261,6 +328,7 @@ def b_click(b):
 			if not (isColumnFilled(list2)):
 				temp = getLowest(list2)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -270,6 +338,7 @@ def b_click(b):
 			if not (isColumnFilled(list3)):
 				temp = getLowest(list3)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -279,6 +348,7 @@ def b_click(b):
 			if not (isColumnFilled(list4)):
 				temp = getLowest(list4)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -288,6 +358,7 @@ def b_click(b):
 			if not (isColumnFilled(list5)):
 				temp = getLowest(list5)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -297,6 +368,7 @@ def b_click(b):
 			if not (isColumnFilled(list6)):
 				temp = getLowest(list6)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
@@ -306,6 +378,7 @@ def b_click(b):
 			if not (isColumnFilled(list7)):
 				temp = getLowest(list7)
 				temp["bg"] = "blue"
+				temp["text"] = "O"
 				clicked = True
 				count += 1
 				checkifwon()
